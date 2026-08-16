@@ -1,0 +1,93 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+.footer {
+  background: v.$ink-deep;
+  color: v.$text-invert;
+  padding-top: clamp(50px, 6vw, 80px);
+
+  &__inner {
+    @include m.container;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 40px;
+    align-items: start;
+    padding-bottom: 44px;
+
+    @include m.below(v.$bp-md) {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+  }
+
+  &__brand {
+    .logo {
+      align-items: flex-start;
+    }
+  }
+
+  &__slogan {
+    margin-top: 14px;
+    max-width: 30ch;
+    color: v.$text-invert-muted;
+    font-family: v.$font-script;
+    font-size: 1.3rem;
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    a {
+      @include m.focus-ring;
+      font-size: 0.95rem;
+      color: v.$text-invert-muted;
+      transition: color 0.25s v.$ease;
+
+      &:hover {
+        color: v.$cream;
+      }
+    }
+
+    @include m.below(v.$bp-md) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+  }
+
+  &__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: right;
+
+    a {
+      @include m.focus-ring;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: color 0.25s v.$ease;
+
+      &:hover {
+        color: v.$gold-light;
+      }
+    }
+
+    @include m.below(v.$bp-md) {
+      text-align: left;
+    }
+  }
+
+  &__bottom {
+    @include m.container;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-block: 22px;
+    border-top: 1px solid v.$line-invert;
+    color: rgba(244, 236, 225, 0.42);
+    font-size: 0.82rem;
+  }
+}

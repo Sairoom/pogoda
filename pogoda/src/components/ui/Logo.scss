@@ -1,0 +1,47 @@
+@use '../../styles/variables' as v;
+
+.logo {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  color: v.$ink;
+
+  &__word {
+    font-family: v.$font-script;
+    font-weight: 700;
+    font-size: 2rem;
+    letter-spacing: 0.01em;
+  }
+
+  &__tagline {
+    margin-top: 2px;
+    font-size: 0.52rem;
+    font-weight: 600;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    opacity: 0.68;
+  }
+
+  &--sm &__word {
+    font-size: 1.6rem;
+  }
+  &--sm &__tagline {
+    font-size: 0.44rem;
+    letter-spacing: 0.3em;
+  }
+
+  &--lg &__word {
+    font-size: clamp(3.4rem, 11vw, 6.5rem);
+  }
+  &--lg &__tagline {
+    margin-top: 8px;
+    font-size: clamp(0.6rem, 1.4vw, 0.78rem);
+    letter-spacing: 0.5em;
+    opacity: 0.8;
+  }
+
+  &--invert {
+    color: v.$cream;
+  }
+}

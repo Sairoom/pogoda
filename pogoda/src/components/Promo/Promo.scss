@@ -1,0 +1,91 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+.promo {
+  padding-block: clamp(60px, 7vw, 100px);
+  background: v.$cream-soft;
+
+  &__inner {
+    @include m.container;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: clamp(24px, 4vw, 56px);
+    align-items: stretch;
+
+    @include m.below(v.$bp-md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    position: relative;
+    padding: clamp(32px, 4.5vw, 58px);
+    border-radius: v.$radius-lg;
+    background: v.$gold;
+    color: v.$ink;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: -60px;
+      bottom: -80px;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    > * {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  &__badge {
+    @include m.eyebrow;
+    display: inline-block;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: v.$ink;
+    color: v.$gold;
+    font-size: 0.62rem;
+  }
+
+  &__title {
+    @include m.heading(1.9rem, 3rem);
+    margin-top: 20px;
+  }
+
+  &__text {
+    margin-top: 14px;
+    max-width: 32ch;
+    font-size: 1.08rem;
+    font-weight: 500;
+  }
+
+  &__note {
+    margin-top: 18px;
+    font-family: v.$font-script;
+    font-size: 1.35rem;
+    opacity: 0.75;
+  }
+
+  &__media {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    min-height: 320px;
+  }
+
+  &__photo {
+    border-radius: v.$radius-lg;
+    box-shadow: v.$shadow-soft;
+
+    &--sm {
+      align-self: center;
+      aspect-ratio: 3 / 4;
+      border-radius: v.$radius;
+    }
+  }
+}

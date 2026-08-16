@@ -1,0 +1,128 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+.about {
+  background: v.$cream-soft;
+
+  &__inner {
+    @include m.container;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(40px, 6vw, 90px);
+    align-items: center;
+
+    @include m.below(v.$bp-md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__principles {
+    display: grid;
+    gap: 26px;
+    margin-top: 44px;
+
+    li {
+      padding-left: 22px;
+      border-left: 2px solid v.$gold;
+    }
+
+    h3 {
+      font-size: 1.12rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    p {
+      margin-top: 6px;
+      color: v.$text-muted;
+      font-size: 0.98rem;
+    }
+  }
+
+  // ─── Коллаж из трёх снимков ───────────────────────────────
+  &__collage {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, minmax(150px, 1fr));
+    gap: 16px;
+    aspect-ratio: 1 / 1.02;
+
+    @include m.below(v.$bp-md) {
+      aspect-ratio: 1 / 0.82;
+    }
+  }
+
+  &__photo {
+    border-radius: v.$radius;
+    box-shadow: v.$shadow-soft;
+
+    &--1 {
+      grid-row: span 2;
+      border-radius: v.$radius-lg;
+    }
+
+    &--3 {
+      align-self: end;
+    }
+  }
+
+  &__stamp {
+    position: absolute;
+    left: 50%;
+    bottom: -18px;
+    transform: translateX(-42%) rotate(-4deg);
+    padding: 14px 22px;
+    border-radius: v.$radius-sm;
+    background: v.$ink;
+    color: v.$cream;
+    font-size: 0.74rem;
+    font-weight: 800;
+    line-height: 1.35;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    box-shadow: v.$shadow-card;
+  }
+
+  // ─── Цифры ────────────────────────────────────────────────
+  &__facts {
+    @include m.container;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: clamp(64px, 8vw, 110px);
+
+    @include m.below(v.$bp-md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__fact {
+    padding: 26px 22px;
+    border-radius: v.$radius;
+    background: v.$milk;
+    border: 1px solid v.$line;
+    text-align: center;
+    transition: transform 0.35s v.$ease, box-shadow 0.35s v.$ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: v.$shadow-soft;
+    }
+
+    strong {
+      display: block;
+      font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: v.$cocoa;
+    }
+
+    span {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.86rem;
+      color: v.$text-muted;
+    }
+  }
+}

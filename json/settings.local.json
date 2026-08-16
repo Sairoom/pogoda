@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"C:/Users/eroha/.claude/projects/c--Users-eroha-Desktop-pogoda/memory/\" 2>/dev/null || echo \"no memory dir\")",
+      "Read(//c/Users/eroha/.claude/projects/c--Users-eroha-Desktop-pogoda/memory/**)",
+      "Bash(npm -v)",
+      "Bash(grep -E \"^\\(typescript|sass|sass-loader\\)$\")",
+      "Bash(npm install *)",
+      "Bash(npm uninstall *)",
+      "Bash(rm -f src/App.css src/App.js src/App.test.js src/index.css src/index.js src/logo.svg src/reportWebVitals.js src/setupTests.js public/logo192.png public/logo512.png README.md)",
+      "Bash(mkdir -p src/components src/styles src/data src/hooks public/images)"
+    ]
+  }
+}

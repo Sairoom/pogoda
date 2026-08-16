@@ -1,0 +1,156 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+.contacts {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    @include m.warm-glow(0.45);
+    pointer-events: none;
+  }
+
+  &__inner {
+    @include m.container;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 0.92fr;
+    gap: clamp(32px, 5vw, 70px);
+    align-items: start;
+
+    @include m.below(v.$bp-md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 24px;
+    margin-top: 46px;
+
+    @include m.below(v.$bp-sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__block {
+    h3 {
+      @include m.eyebrow;
+      color: v.$gold;
+      margin-bottom: 12px;
+    }
+  }
+
+  &__address {
+    font-size: 1.16rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+  }
+
+  &__hours {
+    display: grid;
+    gap: 8px;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      max-width: 260px;
+      font-size: 0.96rem;
+
+      span {
+        color: v.$text-invert-muted;
+      }
+
+      b {
+        font-variant-numeric: tabular-nums;
+      }
+    }
+  }
+
+  &__phone {
+    @include m.focus-ring;
+    display: block;
+    font-size: 1.16rem;
+    font-weight: 700;
+    transition: color 0.25s v.$ease;
+
+    &:hover {
+      color: v.$gold-light;
+    }
+  }
+
+  &__email {
+    @include m.focus-ring;
+    display: block;
+    margin-top: 6px;
+    color: v.$text-invert-muted;
+    font-size: 0.95rem;
+
+    &:hover {
+      color: v.$cream;
+    }
+  }
+
+  &__socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    a {
+      @include m.focus-ring;
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid v.$line-invert;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: border-color 0.25s v.$ease, background 0.25s v.$ease;
+
+      &:hover {
+        border-color: v.$gold;
+        background: rgba(224, 168, 82, 0.12);
+      }
+    }
+  }
+
+  &__route {
+    @include m.focus-ring;
+    display: inline-block;
+    margin-top: 40px;
+    padding: 15px 32px;
+    border-radius: 999px;
+    background: v.$gold;
+    color: v.$ink;
+    font-weight: 700;
+    transition: transform 0.25s v.$ease, background 0.25s v.$ease,
+      box-shadow 0.25s v.$ease;
+
+    &:hover {
+      background: v.$gold-light;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(224, 168, 82, 0.32);
+    }
+  }
+
+  &__map {
+    border-radius: v.$radius-lg;
+    overflow: hidden;
+    border: 1px solid v.$line-invert;
+    box-shadow: v.$shadow-card;
+    background: v.$ink-soft;
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: clamp(360px, 52vh, 560px);
+      border: 0;
+      filter: grayscale(0.25) contrast(1.05);
+    }
+  }
+}

@@ -1,0 +1,146 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 92px;
+}
+
+body {
+  margin: 0;
+  background: v.$cream-soft;
+  color: v.$text;
+  font-family: v.$font-body;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+::selection {
+  background: v.$gold;
+  color: v.$ink;
+}
+
+#root {
+  overflow-x: clip;
+}
+
+// ─── Общие утилиты ──────────────────────────────────────────
+
+.container {
+  @include m.container;
+}
+
+.section {
+  padding: clamp(72px, 9vw, 130px) 0;
+}
+
+.section--dark {
+  background: v.$ink;
+  color: v.$text-invert;
+}
+
+.eyebrow {
+  @include m.eyebrow;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: v.$gold;
+
+  &::before {
+    content: '';
+    width: 26px;
+    height: 1px;
+    background: currentColor;
+  }
+}
+
+.section-title {
+  @include m.heading;
+  margin-top: 18px;
+}
+
+.section-lead {
+  margin-top: 18px;
+  max-width: 58ch;
+  color: v.$text-muted;
+  font-size: 1.05rem;
+
+  .section--dark & {
+    color: v.$text-invert-muted;
+  }
+}
+
+// Появление секций при скролле — включается классом is-visible.
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s v.$ease, transform 0.7s v.$ease;
+  transition-delay: var(--reveal-delay, 0ms);
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

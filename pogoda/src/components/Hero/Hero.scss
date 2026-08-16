@@ -1,0 +1,202 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+.hero {
+  position: relative;
+  min-height: 100vh; // запасной вариант там, где нет svh
+  min-height: min(100svh, 900px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 130px 0;
+  background: v.$ink;
+  color: v.$cream;
+  overflow: hidden;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    img {
+      filter: saturate(0.95) brightness(0.72);
+    }
+  }
+
+  &__veil {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        180deg,
+        rgba(14, 10, 7, 0.86) 0%,
+        rgba(14, 10, 7, 0.58) 38%,
+        rgba(14, 10, 7, 0.92) 100%
+      ),
+      linear-gradient(90deg, rgba(14, 10, 7, 0.8) 0%, transparent 68%);
+  }
+
+  &__lights {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    @include m.warm-glow(0.9);
+    mix-blend-mode: screen;
+    opacity: 0.85;
+    animation: hero-flicker 7s ease-in-out infinite alternate;
+  }
+
+  &__inner {
+    @include m.container;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__kicker {
+    @include m.eyebrow;
+    color: v.$gold;
+    animation: hero-in 0.9s v.$ease both;
+  }
+
+  &__title {
+    margin-top: 22px;
+    animation: hero-in 0.9s 0.08s v.$ease both;
+
+    .logo__word {
+      text-shadow: 0 12px 60px rgba(224, 168, 82, 0.35);
+    }
+  }
+
+  &__slogan {
+    margin-top: 26px;
+    font-family: v.$font-script;
+    font-size: clamp(1.5rem, 3.4vw, 2.3rem);
+    color: v.$gold-light;
+    animation: hero-in 0.9s 0.16s v.$ease both;
+  }
+
+  &__lead {
+    margin-top: 14px;
+    max-width: 46ch;
+    color: rgba(244, 236, 225, 0.76);
+    font-size: 1.05rem;
+    animation: hero-in 0.9s 0.24s v.$ease both;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 38px;
+    animation: hero-in 0.9s 0.32s v.$ease both;
+  }
+
+  &__btn {
+    @include m.focus-ring;
+    padding: 15px 30px;
+    border-radius: 999px;
+    border: 1px solid rgba(244, 236, 225, 0.32);
+    font-weight: 700;
+    font-size: 0.98rem;
+    transition: transform 0.25s v.$ease, background 0.25s v.$ease,
+      border-color 0.25s v.$ease, box-shadow 0.25s v.$ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: v.$cream;
+      background: rgba(244, 236, 225, 0.08);
+    }
+
+    &--primary {
+      background: v.$gold;
+      border-color: v.$gold;
+      color: v.$ink;
+
+      &:hover {
+        background: v.$gold-light;
+        border-color: v.$gold-light;
+        box-shadow: 0 14px 34px rgba(224, 168, 82, 0.34);
+      }
+    }
+  }
+
+  // ─── Бегущая строка с надписями со стен ───────────────────
+  &__ticker {
+    position: relative;
+    z-index: 2;
+    margin-top: clamp(56px, 8vw, 96px);
+    padding-block: 16px;
+    border-top: 1px solid v.$line-invert;
+    border-bottom: 1px solid v.$line-invert;
+    background: rgba(14, 10, 7, 0.55);
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+  }
+
+  &__ticker-track {
+    display: flex;
+    width: max-content;
+    animation: hero-marquee 38s linear infinite;
+  }
+
+  &__ticker-group {
+    display: flex;
+    gap: 48px;
+    padding-right: 48px;
+
+    span {
+      @include m.eyebrow;
+      color: rgba(244, 236, 225, 0.62);
+      white-space: nowrap;
+
+      &::after {
+        content: '·';
+        margin-left: 48px;
+        color: v.$gold;
+      }
+    }
+  }
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes hero-flicker {
+  0%,
+  100% {
+    opacity: 0.72;
+  }
+  45% {
+    opacity: 0.95;
+  }
+  70% {
+    opacity: 0.8;
+  }
+}

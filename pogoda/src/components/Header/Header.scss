@@ -1,0 +1,194 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  color: v.$cream;
+  transition: background 0.4s v.$ease, backdrop-filter 0.4s v.$ease,
+    box-shadow 0.4s v.$ease;
+
+  &--scrolled {
+    background: rgba(14, 10, 7, 0.82);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 1px 0 v.$line-invert;
+  }
+
+  &--open {
+    background: v.$ink;
+  }
+
+  &__inner {
+    @include m.container;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    min-height: 84px;
+  }
+
+  &__logo {
+    @include m.focus-ring;
+    flex-shrink: 0;
+  }
+
+  &__nav {
+    display: flex;
+    gap: 30px;
+    margin-inline: auto;
+
+    @include m.below(v.$bp-lg) {
+      display: none;
+    }
+  }
+
+  &__link {
+    @include m.focus-ring;
+    position: relative;
+    font-size: 0.94rem;
+    font-weight: 600;
+    color: rgba(244, 236, 225, 0.74);
+    padding-block: 6px;
+    transition: color 0.25s v.$ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: v.$gold;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s v.$ease;
+    }
+
+    &:hover,
+    &.is-active {
+      color: v.$cream;
+    }
+
+    &.is-active::after,
+    &:hover::after {
+      transform: scaleX(1);
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    @include m.below(v.$bp-lg) {
+      display: none;
+    }
+  }
+
+  &__phone {
+    @include m.focus-ring;
+    font-weight: 600;
+    font-size: 0.94rem;
+    white-space: nowrap;
+    transition: color 0.25s v.$ease;
+
+    &:hover {
+      color: v.$gold-light;
+    }
+  }
+
+  &__cta {
+    @include m.focus-ring;
+    padding: 11px 22px;
+    border-radius: 999px;
+    background: v.$gold;
+    color: v.$ink;
+    font-weight: 700;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    transition: transform 0.25s v.$ease, box-shadow 0.25s v.$ease,
+      background 0.25s v.$ease;
+
+    &:hover {
+      background: v.$gold-light;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(224, 168, 82, 0.35);
+    }
+  }
+
+  // ─── Бургер ───────────────────────────────────────────────
+  &__burger {
+    @include m.focus-ring;
+    display: none;
+    margin-left: auto;
+    width: 44px;
+    height: 44px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+
+    span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: v.$cream;
+      border-radius: 2px;
+      transition: transform 0.3s v.$ease, opacity 0.3s v.$ease;
+    }
+
+    @include m.below(v.$bp-lg) {
+      display: flex;
+    }
+  }
+
+  &--open &__burger {
+    span:first-child {
+      transform: translateY(4.5px) rotate(45deg);
+    }
+    span:last-child {
+      transform: translateY(-4.5px) rotate(-45deg);
+    }
+  }
+
+  // ─── Выезжающее меню ──────────────────────────────────────
+  &__drawer {
+    @include m.container;
+    padding-block: 12px 40px;
+    background: v.$ink;
+    border-top: 1px solid v.$line-invert;
+
+    &[hidden] {
+      display: none;
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+
+      a {
+        @include m.focus-ring;
+        padding: 16px 0;
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        border-bottom: 1px solid v.$line-invert;
+      }
+    }
+  }
+
+  &__drawer-phone {
+    display: inline-block;
+    margin-top: 26px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: v.$gold;
+  }
+
+  &__drawer-address {
+    margin-top: 6px;
+    color: v.$text-invert-muted;
+    font-size: 0.95rem;
+  }
+}
